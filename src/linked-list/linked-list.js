@@ -9,11 +9,8 @@ var buildLinkedList = function() {
   var newLinkedList = {};
   var first = null;
 
-
-
-
-
-  newLinkedList.insertAtHead = function(newNode) {
+  newLinkedList.insertAtHead = function(value) {
+    let newNode = new Node(value, null);
     if (first == null) {
       first = newNode;
     } else {
@@ -23,28 +20,21 @@ var buildLinkedList = function() {
     }
   }
 
-  newLinkedList.insertAfter = function(existingNode, newNode) {
-
-  }
-
   newLinkedList.isEmpty = function() {
     return (first === "null")
   };
-
-  newLinkedList.getFirst = function() {
-    return first;
-  }
 
   var createIterator = function () {
     let currentNode = first;
     let iterator = {};
     let end = null;
-    iterator.read = function () {
+
+    iterator.readInPlace = function () {
       return currentNode.value;
     }
-    iterator.pull = function () {
+    iterator.next = function () {
       if (currentNode == null) {
-        return;
+        return null;
       } else {
         let val = currentNode.value;
         if (currentNode.next == null) {
@@ -54,26 +44,32 @@ var buildLinkedList = function() {
         return val;
       }
     }
-    iterator.insertNext = function (newValue) {
+    iterator.insertHere = function (value) {
+      let newNode = new Node(value, null);
       if (end !== null) {
-        return;
-      }
-
-      if (existingNode.next == null) {
-        existingNode.next = newNode;
+        end.next = newNode;
+        currentNode = newNode;
+        end = newNode;
+        return null;
       } else {
-        let placeholder = existingNode.next;
-        existingNode.next = newNode;
-        newNode.next = placeholder;
+        if (currentNode.next == null) {
+          currentNode.next = newNode;
+        } else {
+          let placeholder = currentNode.next;
+          currentNode.next = newNode;
+          newNode.next = placeholder;
+        }
       }
     }
+    return iterator;
   }
 
-
+  newLinkedList.getIterator = function() {
+      return createIterator();
+    }
   return newLinkedList;
 }
 
 export default {
-  create : buildLinkedList,
-  Node : Node
+  create : buildLinkedList
 }

@@ -12,10 +12,9 @@
   ],
   "author": "Adam Cross",
   "license": "SEE LICENSE IN LICENSE.md",
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/xerocross/xerocross-dstructs.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xerocross/xerocross-dstructs.git"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -26,5 +25,8 @@
     "regenerator-runtime": "^0.12.0",
     "webpack": "^4.16.2",
     "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "we-assert": "^0.12.0"
   }
 }
