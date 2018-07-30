@@ -2,10 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: "./src/js-data-structures",
+  entry: "./src/xerocross-dstructs.js",
   output: {
     path: path.resolve(__dirname, "./"),
-    filename: "js-data-structures.js",
+    filename: "xerocross-dstructs.js",
     library: "xD",
     libraryTarget: "umd",
     umdNamedDefine: true

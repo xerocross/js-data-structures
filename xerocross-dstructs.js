@@ -101,6 +101,105 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BuildLinkedList = undefined;
+
+var _linkedList = __webpack_require__(1);
+
+var _linkedList2 = _interopRequireDefault(_linkedList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BuildLinkedList = exports.BuildLinkedList = _linkedList2.default.buildLinkedList;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Node = function Node(val, next) {
+  var self = this;
+  this.value = val;
+  this.next = next;
+};
+
+var buildLinkedList = function buildLinkedList() {
+  var newLinkedList = {};
+  var first = null;
+
+  newLinkedList.insertAtHead = function (value) {
+    var newNode = new Node(value, null);
+    if (first == null) {
+      first = newNode;
+    } else {
+      var previousFirst = first;
+      first = newNode;
+      newNode.next = previousFirst;
+    }
+  };
+
+  newLinkedList.isEmpty = function () {
+    return first === "null";
+  };
+
+  var createIterator = function createIterator() {
+    var currentNode = first;
+    var iterator = {};
+    var end = null;
+
+    iterator.readInPlace = function () {
+      return currentNode.value;
+    };
+    iterator.next = function () {
+      if (currentNode == null) {
+        return null;
+      } else {
+        var val = currentNode.value;
+        if (currentNode.next == null) {
+          end = currentNode;
+        }
+        currentNode = currentNode.next;
+        return val;
+      }
+    };
+    iterator.insertHere = function (value) {
+      var newNode = new Node(value, null);
+      if (end !== null) {
+        end.next = newNode;
+        currentNode = newNode;
+        end = newNode;
+        return null;
+      } else {
+        if (currentNode.next == null) {
+          currentNode.next = newNode;
+        } else {
+          var placeholder = currentNode.next;
+          currentNode.next = newNode;
+          newNode.next = placeholder;
+        }
+      }
+    };
+    return iterator;
+  };
+
+  newLinkedList.getIterator = function () {
+    return createIterator();
+  };
+  return newLinkedList;
+};
+
+exports.default = {
+  create: buildLinkedList
+};
+
 /***/ })
 /******/ ]);
 });
