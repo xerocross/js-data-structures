@@ -104,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BuildLinkedList = undefined;
+exports.buildLinkedList = undefined;
 
 var _linkedList = __webpack_require__(1);
 
@@ -112,7 +112,7 @@ var _linkedList2 = _interopRequireDefault(_linkedList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BuildLinkedList = exports.BuildLinkedList = _linkedList2.default.buildLinkedList;
+var buildLinkedList = exports.buildLinkedList = _linkedList2.default.buildLinkedList;
 
 /***/ }),
 /* 1 */
@@ -197,7 +197,7 @@ var buildLinkedList = function buildLinkedList() {
 };
 
 exports.default = {
-  create: buildLinkedList
+  buildLinkedList: buildLinkedList
 };
 
 /***/ })

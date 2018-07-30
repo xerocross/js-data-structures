@@ -71,5 +71,5 @@ var buildLinkedList = function() {
 }
 
 export default {
-  create : buildLinkedList
+  buildLinkedList : buildLinkedList
 }
