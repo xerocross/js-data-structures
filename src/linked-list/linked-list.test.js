@@ -1,7 +1,7 @@
 import LinkedList from "./linked-list.js"
 
 test("can insert a new head and retrieve it",function(){
-  var newLinkedList = LinkedList.create();
+  var newLinkedList = LinkedList.buildLinkedList();
   newLinkedList.insertAtHead(17);
   var iterator = newLinkedList.getIterator();
   expect(iterator.next()).toBe(17);
@@ -9,7 +9,7 @@ test("can insert a new head and retrieve it",function(){
 
 
 test("can push a new element onto the head",function(){
-  var newLinkedList = LinkedList.create();
+  var newLinkedList = LinkedList.buildLinkedList();
   newLinkedList.insertAtHead("one");
   newLinkedList.insertAtHead("two");
   var iterator = newLinkedList.getIterator();
@@ -17,7 +17,7 @@ test("can push a new element onto the head",function(){
 });
 
 test("can push two elements and read them back",function(){
-  var newLinkedList = LinkedList.create();
+  var newLinkedList = LinkedList.buildLinkedList();
   newLinkedList.insertAtHead("one");
   newLinkedList.insertAtHead("two");
   var iterator = newLinkedList.getIterator();
@@ -28,7 +28,7 @@ test("can push two elements and read them back",function(){
 });
 
 test("read to end, then null",function(){
-  var newLinkedList = LinkedList.create();
+  var newLinkedList = LinkedList.buildLinkedList();
   newLinkedList.insertAtHead("one");
   newLinkedList.insertAtHead("two");
   var iterator = newLinkedList.getIterator();
@@ -38,7 +38,7 @@ test("read to end, then null",function(){
 });
 
 test("can read to end, then insert new value, then read it",function(){
-  var newLinkedList = LinkedList.create();
+  var newLinkedList = LinkedList.buildLinkedList();
   newLinkedList.insertAtHead("one");
   newLinkedList.insertAtHead("two");
   var iterator = newLinkedList.getIterator();
@@ -49,7 +49,7 @@ test("can read to end, then insert new value, then read it",function(){
 });
 
 test("can insert between two elements",function(){
-  var newLinkedList = LinkedList.create();
+  var newLinkedList = LinkedList.buildLinkedList();
   newLinkedList.insertAtHead("one");
   newLinkedList.insertAtHead("two");
   newLinkedList.insertAtHead("three");

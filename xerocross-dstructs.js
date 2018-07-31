@@ -104,15 +104,20 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.buildLinkedList = undefined;
+exports.buildBinaryMaxHeap = exports.buildLinkedList = undefined;
 
 var _linkedList = __webpack_require__(1);
 
 var _linkedList2 = _interopRequireDefault(_linkedList);
 
+var _binaryMaxHeap = __webpack_require__(2);
+
+var _binaryMaxHeap2 = _interopRequireDefault(_binaryMaxHeap);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var buildLinkedList = exports.buildLinkedList = _linkedList2.default.buildLinkedList;
+var buildBinaryMaxHeap = exports.buildBinaryMaxHeap = _binaryMaxHeap2.default.buildHeap;
 
 /***/ }),
 /* 1 */
@@ -198,6 +203,118 @@ var buildLinkedList = function buildLinkedList() {
 
 exports.default = {
   buildLinkedList: buildLinkedList
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _comparisonWrapper = __webpack_require__(3);
+
+var swap = function swap(arr, i, j) {
+  var placeholder = arr[i];
+  arr[i] = arr[j];
+  arr[j] = placeholder;
+};
+var e;
+var buildBinaryMaxHeap = function buildBinaryMaxHeap(compareFunction) {
+  e = (0, _comparisonWrapper.getComparisonWrapper)(compareFunction);
+  var root = null;
+  var heap = {};
+  var storageArray = [null];
+
+  var getHalf = function getHalf(i) {
+    return Math.floor(i / 2);
+  };
+
+  var addElementAtEndIrrespectiveOfHeapCondition = function addElementAtEndIrrespectiveOfHeapCondition(elt) {
+    storageArray.push(elt);
+  };
+
+  var reHeap = function reHeap(arr) {
+    // assume the heap represented by storageArray meets the heap condition
+    // except possibly the last element
+    var hi = storageArray.length - 1;
+    if (hi <= 1) {
+      return;
+    }
+    var index = hi;
+    while (index > 1) {
+      debugger;
+      var parentIndex = getHalf(index);
+      if (e(storageArray[parentIndex], "<=", storageArray[index])) {
+        swap(arr, parentIndex, index);
+        settleDown(arr, parentIndex);
+      }
+      index = parentIndex;
+    }
+  };
+
+  var settleDown = function settleDown(arr, index) {
+    var newIndex = index;
+    while (2 * newIndex < arr.length) {
+      var maxIndex = 2 * newIndex;
+      if (maxIndex + 1 < arr.length && e(arr[maxIndex], "<", arr[maxIndex + 1])) {
+        maxIndex++;
+      }
+      if (e(arr[maxIndex], "<=", arr[newIndex])) {
+        //do nothing
+      } else {
+        swap(arr, newIndex, maxIndex);
+        newIndex = maxIndex;
+      }
+    }
+  };
+  heap.insert = function (value) {
+    addElementAtEndIrrespectiveOfHeapCondition(value);
+    reHeap(storageArray);
+  };
+  heap.get = function (index) {
+    debugger;
+    return storageArray[index + 1];
+  };
+  heap.getRawArray = function () {
+    return storageArray;
+  };
+
+  return heap;
+};
+exports.default = {
+  buildHeap: buildBinaryMaxHeap
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports.getComparisonWrapper = function (compareFunction) {
+  return function (leftElement, comparisonString, rightElement) {
+    switch (comparisonString) {
+      case "<":
+        return compareFunction(leftElement, rightElement) < 0;
+        break;
+      case "<=":
+        return compareFunction(leftElement, rightElement) <= 0;
+        break;
+      case ">":
+        return compareFunction(leftElement, rightElement) > 0;
+        break;
+      case ">=":
+        return compareFunction(leftElement, rightElement) >= 0;
+        break;
+        return undefined;
+    }
+  };
 };
 
 /***/ })
