@@ -1,6 +1,6 @@
 {
   "name": "xerocross-dstructs",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Some useful data structures implemented in JavaScript.",
   "main": "xerocross-dstructs.js",
   "scripts": {
