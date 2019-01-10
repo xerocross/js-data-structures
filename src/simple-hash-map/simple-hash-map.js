@@ -33,7 +33,7 @@ let SimpleHashMap = {
         hashMap.get = function(key) {
             let slotIndex = getSlotIndexFor(key);
             if (hashContainer[slotIndex] == undefined) {
-                return false;
+                return null;
             } else {
                 let arr = hashContainer[slotIndex];
                 for (let i = 0; i < arr.length; i ++) {
