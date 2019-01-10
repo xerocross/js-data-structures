@@ -2,6 +2,56 @@ import SimpleHashMap from "./simple-hash-map.js";
 import {StringHash} from "../helpers/string-hash.js";
 import TestStrings from "../helpers/test-strings.js";
 
+test("build without hash function throws err", function() {
+    expect(function(){
+        SimpleHashMap.build(13);
+    }).toThrow(new Error("SimpleHashMap: improper or undefined hashfunction."));
+});
+
+test("build without hash function throws err", function() {
+    expect(function(){
+        SimpleHashMap.build(13, {"a":0});
+    }).toThrow(new Error("SimpleHashMap: improper or undefined hashfunction."));
+});
+
+test("if hash function doesn't work, throw err", function() {
+    expect(function(){
+        let map = SimpleHashMap.build(13, (e) => {return "apple";});
+        map.add("str");
+        map.get("str");
+    }).toThrow(new Error("SimpleHashMap: An unknown error occured with your SimpleHashMap hash function."));
+});
+
+test("if numSlots = 0, throw err", function() {
+    expect(function(){
+        SimpleHashMap.build(0, StringHash);
+    }).toThrow();
+});
+
+test("if numSlots < 0, throw err", function() {
+    expect(function(){
+        SimpleHashMap.build(-17, StringHash);
+    }).toThrow();
+});
+
+test("if numSlots is a string, throw err", function() {
+    expect(function(){
+        SimpleHashMap.build("4", StringHash);
+    }).toThrow();
+});
+
+test("if numSlots is an object, throw err", function() {
+    expect(function(){
+        SimpleHashMap.build({a:4}, StringHash);
+    }).toThrow();
+});
+
+test("if numSlots is NaN, throw err", function() {
+    expect(function(){
+        SimpleHashMap.build(NaN, StringHash);
+    }).toThrow();
+});
+
 test("can add one element and retreive value", function() {
     let hashMap = SimpleHashMap.build(13,StringHash);
     hashMap.add("apple", 12);

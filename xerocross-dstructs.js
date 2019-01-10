@@ -1,1 +1,458 @@
-!function(e,n){"object"==typeof exports&&"object"==typeof module?module.exports=n():"function"==typeof define&&define.amd?define("xD",[],n):"object"==typeof exports?exports.xD=n():e.xD=n()}(window,function(){return function(e){var n={};function t(r){if(n[r])return n[r].exports;var u=n[r]={i:r,l:!1,exports:{}};return e[r].call(u.exports,u,u.exports,t),u.l=!0,u.exports}return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,n){if(1&n&&(e=t(e)),8&n)return e;if(4&n&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&n&&"string"!=typeof e)for(var u in e)t.d(r,u,function(n){return e[n]}.bind(null,u));return r},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="",t(t.s=0)}([function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.SimpleHashMap=n.buildBinaryMaxHeap=n.buildLinkedList=void 0;var r=o(t(1)),u=o(t(2)),i=o(t(4));function o(e){return e&&e.__esModule?e:{default:e}}n.buildLinkedList=r.default.buildLinkedList,n.buildBinaryMaxHeap=u.default.buildHeap;n.SimpleHashMap=i.default},function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=function(e,n){this.value=e,this.next=n};n.default={buildLinkedList:function(){var e={},n=null;e.insertAtHead=function(e){var t=new r(e,null);if(null==n)n=t;else{var u=n;n=t,t.next=u}},e.isEmpty=function(){return"null"===n};return e.getIterator=function(){return e=n,u=null,(t={}).readInPlace=function(){return e.value},t.next=function(){if(null==e)return null;var n=e.value;return null==e.next&&(u=e),e=e.next,n},t.insertHere=function(n){var t=new r(n,null);if(null!==u)return u.next=t,e=t,u=t,null;if(null==e.next)e.next=t;else{var i=e.next;e.next=t,t.next=i}},t;var e,t,u},e}}},function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r,u=t(3),i=function(e,n,t){var r=e[n];e[n]=e[t],e[t]=r};n.default={buildHeap:function(e){r=(0,u.getComparisonWrapper)(e);var n={},t=[null],o=function(e,n){for(var t=n;2*t<e.length;){var u=2*t;u+1<e.length&&r(e[u],"<",e[u+1])&&u++,r(e[u],"<=",e[t])||i(e,t,u),t=u}};return n.insert=function(e){var n;n=e,t.push(n),function(e){var n=t.length-1;if(!(n<=1))for(var u,l=n;l>1;){var a=(u=l,Math.floor(u/2));r(t[a],"<=",t[l])&&(i(e,a,l),o(e,a)),l=a}}(t)},n.get=function(e){return t[e+1]},n.getRawArray=function(){return t},n},isHeap:function(e,n){for(var t=1,r=(0,u.getComparisonWrapper)(n);2*t<e.length;){if(r(e[t],"<",e[2*t]))return!1;if(2*t+1<e.length&&r(e[t],"<",e[2*t+1]))return!1;t++}return!0}}},function(e,n,t){"use strict";e.exports.getComparisonWrapper=function(e){return function(n,t,r){switch(t){case"<":return e(n,r)<0;case"<=":return e(n,r)<=0;case">":return e(n,r)>0;case">=":return e(n,r)>=0}}}},function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={build:function(e,n){for(var t={},r=[],u=0;u<e;u++)r[u]=[];var i=function(t){var r=n(t);for(r%=e;r<0;)r+=e;return r%e};return t.add=function(e,n){var u=t.get(e);if(null!=u)u.value=n;else{var o=i(e);r[o].push({key:e,value:n})}},t.get=function(e){var n=i(e);if(null==r[n])return!1;for(var t=r[n],u=0;u<t.length;u++)if(t[u].key==e)return t[u];return null},t.contains=function(e){return null!==t.get(e)},t.getValue=function(e){var n=i(e);if(null==r[n])return!1;for(var t=r[n],u=0;u<t.length;u++)if(t[u].key==e)return t[u].value;return!1},t.remove=function(e){var n=i(e);if(null==r[n])return!0;for(var t=r[n],u=[],o=0;o<t.length;o++)t[o].key!=e&&u.push(t[o]);r[n]=u},t.toList=function(){for(var e=[],n=0;n<r.length;n++)for(var t=r[n],u=0;u<t.length;u++)e.push(t[u]);return e},t}};n.default=r}])});
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("xD", [], factory);
+	else if(typeof exports === 'object')
+		exports["xD"] = factory();
+	else
+		root["xD"] = factory();
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.SimpleHashMap = exports.buildBinaryMaxHeap = exports.buildLinkedList = undefined;
+
+var _linkedList = __webpack_require__(1);
+
+var _linkedList2 = _interopRequireDefault(_linkedList);
+
+var _binaryMaxHeap = __webpack_require__(2);
+
+var _binaryMaxHeap2 = _interopRequireDefault(_binaryMaxHeap);
+
+var _simpleHashMap = __webpack_require__(4);
+
+var _simpleHashMap2 = _interopRequireDefault(_simpleHashMap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var buildLinkedList = exports.buildLinkedList = _linkedList2.default.buildLinkedList;
+var buildBinaryMaxHeap = exports.buildBinaryMaxHeap = _binaryMaxHeap2.default.buildHeap;
+exports.SimpleHashMap = _simpleHashMap2.default;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var Node = function Node(val, next) {
+    this.value = val;
+    this.next = next;
+};
+
+var buildLinkedList = function buildLinkedList() {
+    var newLinkedList = {};
+    var first = null;
+
+    newLinkedList.insertAtHead = function (value) {
+        var newNode = new Node(value, null);
+        if (first == null) {
+            first = newNode;
+        } else {
+            var previousFirst = first;
+            first = newNode;
+            newNode.next = previousFirst;
+        }
+    };
+
+    newLinkedList.isEmpty = function () {
+        return first === "null";
+    };
+
+    var createIterator = function createIterator() {
+        var currentNode = first;
+        var iterator = {};
+        var end = null;
+
+        iterator.readInPlace = function () {
+            return currentNode.value;
+        };
+        iterator.next = function () {
+            if (currentNode == null) {
+                return null;
+            } else {
+                var val = currentNode.value;
+                if (currentNode.next == null) {
+                    end = currentNode;
+                }
+                currentNode = currentNode.next;
+                return val;
+            }
+        };
+        iterator.insertHere = function (value) {
+            var newNode = new Node(value, null);
+            if (end !== null) {
+                end.next = newNode;
+                currentNode = newNode;
+                end = newNode;
+                return null;
+            } else {
+                if (currentNode.next == null) {
+                    currentNode.next = newNode;
+                } else {
+                    var placeholder = currentNode.next;
+                    currentNode.next = newNode;
+                    newNode.next = placeholder;
+                }
+            }
+        };
+        return iterator;
+    };
+
+    newLinkedList.getIterator = function () {
+        return createIterator();
+    };
+    return newLinkedList;
+};
+
+exports.default = {
+    buildLinkedList: buildLinkedList
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _comparisonWrapper = __webpack_require__(3);
+
+var swap = function swap(arr, i, j) {
+    var placeholder = arr[i];
+    arr[i] = arr[j];
+    arr[j] = placeholder;
+};
+var e;
+var buildBinaryMaxHeap = function buildBinaryMaxHeap(compareFunction) {
+    e = (0, _comparisonWrapper.getComparisonWrapper)(compareFunction);
+    var root = null;
+    var heap = {};
+    var storageArray = [null];
+
+    var getHalf = function getHalf(i) {
+        return Math.floor(i / 2);
+    };
+
+    var addElementAtEndIrrespectiveOfHeapCondition = function addElementAtEndIrrespectiveOfHeapCondition(elt) {
+        storageArray.push(elt);
+    };
+
+    var reHeap = function reHeap(arr) {
+        // assume the heap represented by storageArray meets the heap condition
+        // except possibly the last element
+        var hi = storageArray.length - 1;
+        if (hi <= 1) {
+            return;
+        }
+        var index = hi;
+        while (index > 1) {
+            var parentIndex = getHalf(index);
+            if (e(storageArray[parentIndex], "<=", storageArray[index])) {
+                swap(arr, parentIndex, index);
+                settleDown(arr, parentIndex);
+            }
+            index = parentIndex;
+        }
+    };
+
+    var settleDown = function settleDown(arr, index) {
+        var newIndex = index;
+        while (2 * newIndex < arr.length) {
+            var maxIndex = 2 * newIndex;
+            if (maxIndex + 1 < arr.length && e(arr[maxIndex], "<", arr[maxIndex + 1])) {
+                maxIndex++;
+            }
+            if (e(arr[maxIndex], "<=", arr[newIndex])) {
+                //do nothing
+            } else {
+                swap(arr, newIndex, maxIndex);
+            }
+            newIndex = maxIndex;
+        }
+    };
+    heap.insert = function (value) {
+        addElementAtEndIrrespectiveOfHeapCondition(value);
+        reHeap(storageArray);
+    };
+    heap.get = function (index) {
+        return storageArray[index + 1];
+    };
+    heap.getRawArray = function () {
+        return storageArray;
+    };
+    return heap;
+};
+
+var isHeap = function isHeap(arr, compareFunction) {
+    var index = 1;
+    var e = (0, _comparisonWrapper.getComparisonWrapper)(compareFunction);
+    while (2 * index < arr.length) {
+        if (e(arr[index], "<", arr[2 * index])) {
+            return false;
+        }
+        if (2 * index + 1 < arr.length && e(arr[index], "<", arr[2 * index + 1])) {
+            return false;
+        }
+        index++;
+    }
+    return true;
+};
+exports.default = {
+    buildHeap: buildBinaryMaxHeap,
+    isHeap: isHeap
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports.getComparisonWrapper = function (compareFunction) {
+  return function (leftElement, comparisonString, rightElement) {
+    switch (comparisonString) {
+      case "<":
+        return compareFunction(leftElement, rightElement) < 0;
+        break;
+      case "<=":
+        return compareFunction(leftElement, rightElement) <= 0;
+        break;
+      case ">":
+        return compareFunction(leftElement, rightElement) > 0;
+        break;
+      case ">=":
+        return compareFunction(leftElement, rightElement) >= 0;
+        break;
+        return undefined;
+    }
+  };
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var SimpleHashMap = {
+
+    build: function build(numSlots, hashFunction) {
+        var hashMap = {};
+        var hashContainer = [];
+
+        if (typeof numSlots !== "number" || isNaN(numSlots) || numSlots <= 0) {
+            throw new Error("SimpleHashMap: numSlots must be > 0.");
+        }
+
+        if (hashFunction == undefined || typeof hashFunction !== "function") {
+            throw new Error("SimpleHashMap: improper or undefined hashfunction.");
+        }
+
+        for (var i = 0; i < numSlots; i++) {
+            hashContainer[i] = [];
+        }
+
+        var getSlotIndexFor = function getSlotIndexFor(newElt) {
+            try {
+                var hash = hashFunction(newElt);
+                hash = hash % numSlots;
+                if (isNaN(hash)) {
+                    throw new Error("NaN");
+                }
+                while (hash < 0) {
+                    hash += numSlots;
+                }
+                return hash % numSlots;
+            } catch (e) {
+                throw new Error("SimpleHashMap: An unknown error occured with your SimpleHashMap hash function.");
+            }
+        };
+
+        hashMap.add = function (key, val) {
+            var item = hashMap.get(key);
+            if (item != null) {
+                item.value = val;
+            } else {
+                var slotIndex = getSlotIndexFor(key);
+
+                hashContainer[slotIndex].push({
+                    key: key,
+                    value: val
+                });
+            }
+        };
+
+        hashMap.get = function (key) {
+            var slotIndex = getSlotIndexFor(key);
+            if (hashContainer[slotIndex] == undefined) {
+                return null;
+            } else {
+                var arr = hashContainer[slotIndex];
+                for (var _i = 0; _i < arr.length; _i++) {
+                    if (arr[_i].key == key) {
+                        return arr[_i];
+                    }
+                }
+                return null;
+            }
+        };
+
+        hashMap.contains = function (key) {
+            return hashMap.get(key) !== null;
+        };
+
+        hashMap.getValue = function (key) {
+            var elt = hashMap.get(key);
+            if (elt) {
+                return elt.value;
+            } else {
+                return undefined;
+            }
+        };
+
+        hashMap.remove = function (key) {
+            var slotIndex = getSlotIndexFor(key);
+            if (hashContainer[slotIndex] == undefined) {
+                return true;
+            } else {
+                var arr = hashContainer[slotIndex];
+                var newArray = [];
+                for (var _i2 = 0; _i2 < arr.length; _i2++) {
+                    if (arr[_i2].key != key) {
+                        newArray.push(arr[_i2]);
+                    }
+                }
+                hashContainer[slotIndex] = newArray;
+            }
+        };
+
+        hashMap.toList = function () {
+            var list = [];
+            for (var _i3 = 0; _i3 < hashContainer.length; _i3++) {
+                var slot = hashContainer[_i3];
+                for (var j = 0; j < slot.length; j++) {
+                    list.push(slot[j]);
+                }
+            }
+            return list;
+        };
+
+        return hashMap;
+    }
+};
+
+exports.default = SimpleHashMap;
+
+/***/ })
+/******/ ]);
+});

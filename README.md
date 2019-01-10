@@ -18,12 +18,11 @@ Practice.  Why not?  Who cares?
 ```
     import {SimpleHashMap} from "xerocross-dstructs";
     let hashMap = SimpleHashMap.build(numSlots, hashFunction);
-    hashMap.add(key, value);
-    hashMap.get(key);
-    hashMap.getValue(key);
-    hashMap.contains(key);
+    hashMap.add(key, value); // updates value on duplicate
+    hashMap.getValue(key); // returns value or undefined
+    hashMap.contains(key); // returns boolean
     hashMap.remove(key);
-    hashMap.toList();
+    hashMap.toList(); // returns JavaScript array of {key, value} objects
 
 ```
 

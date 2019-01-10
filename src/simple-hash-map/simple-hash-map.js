@@ -3,17 +3,35 @@ let SimpleHashMap = {
     build : function(numSlots, hashFunction) {
         let hashMap = {};
         let hashContainer = [];
+
+        
+        if (typeof numSlots !== "number" || isNaN(numSlots) || numSlots <= 0) {
+            throw new Error("SimpleHashMap: numSlots must be > 0.");
+        }
+
+        if (hashFunction == undefined || typeof hashFunction !== "function") {
+            throw new Error("SimpleHashMap: improper or undefined hashfunction.");
+        }
+        
+
         for (let i = 0; i < numSlots; i++) {
             hashContainer[i] = [];
         }
 
         let getSlotIndexFor = function(newElt) {
-            let hash = hashFunction(newElt);
-            hash = hash % numSlots;
-            while (hash < 0) {
-                hash += numSlots;
+            try {
+                let hash = hashFunction(newElt);
+                hash = hash % numSlots;
+                if (isNaN(hash)) {
+                    throw new Error("NaN");
+                }
+                while (hash < 0) {
+                    hash += numSlots;
+                }
+                return hash % numSlots;
+            } catch (e) {
+                throw new Error("SimpleHashMap: An unknown error occured with your SimpleHashMap hash function.");
             }
-            return hash % numSlots;
         };
 
         hashMap.add = function(key, val) {
@@ -50,17 +68,11 @@ let SimpleHashMap = {
         };
 
         hashMap.getValue = function(key) {
-            let slotIndex = getSlotIndexFor(key);
-            if (hashContainer[slotIndex] == undefined) {
-                return false;
+            let elt = hashMap.get(key);
+            if (elt) {
+                return elt.value;
             } else {
-                let arr = hashContainer[slotIndex];
-                for (let i = 0; i < arr.length; i ++) {
-                    if (arr[i].key == key) {
-                        return arr[i].value;
-                    }
-                }
-                return false;
+                return undefined;
             }
         };
 
