@@ -11,6 +11,23 @@ This is a work under construction.
 
 Practice.  Why not?  Who cares?
 
+## Exports
+
+### SimpleHashMap
+
+```
+    import {SimpleHashMap} from "xerocross-dstructs";
+    let hashMap = SimpleHashMap.build(numSlots, hashFunction);
+    hashMap.add(key, value);
+    hashMap.get(key);
+    hashMap.getValue(key);
+    hashMap.contains(key);
+    hashMap.remove(key);
+    hashMap.toList();
+
+```
+
+
 ## License
 
 See the [LICENSE.md](LICENSE.md) file for details.
